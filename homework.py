@@ -1,5 +1,6 @@
 import requests
 import json
+import random
 
 def show_menu():
     """Display the main menu"""
@@ -80,10 +81,11 @@ def get_activity_by_type():
     response = requests.get(url, params=param)
     if response.status_code == 200:
         result = response.json()
+        rand_int = random.randint(0, len(result) - 1)
         print("\nActivity Suggestion by type:")
-        print(f"Activity: {result[0]['activity']}")
-        print(f"Type: {result[2]['type']}")
-        print(f"Participants: {result[3]['participants']}")
+        print(f"Activity: {result[rand_int]['activity']}")
+        print(f"Type: {result[rand_int]['type']}")
+        print(f"Participants: {result[rand_int]['participants']}")
     else:
         print("Please enter valid activity type.")
     """
@@ -109,10 +111,11 @@ def get_activity_by_participants():
     response = requests.get(url, params=param)
     if search_num >= 1 and search_num <= 6 or search_num == 8:
         result = response.json()
+        random_int = random.randint(0, len(result) - 1)
         print("\nActivity Suggestion by # of participants:")
-        print(f"Activity: {result[0]['activity']}")
-        print(f"Type: {result[2]['type']}")
-        print(f"Participants: {result[3]['participants']}")
+        print(f"Activity: {result[random_int]['activity']}")
+        print(f"Type: {result[random_int]['type']}")
+        print(f"Participants: {result[random_int]['participants']}")
     else:
         print("Please enter valid #, 1-6 or 8.")
     """
